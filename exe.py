@@ -49,7 +49,6 @@ while True:
 	if cv2.waitKey(1) & 0xFF == ord('q'): #按q退出
 		
 		connection.close()	#關閉連線
-		board.close()
 		print('')
 		print('connection finish')
 		break;				#跳出迴圈
@@ -110,7 +109,7 @@ while True:
 			print('')			
 			print('%s	score = %.5f' % (finall_name, finall_num))			
 			print ( 'photo Name : '+ time.strftime("%g%m%d%H%M%S")) #年分後兩位 2017的17 #月份 #日期 #小時 #分鐘 #秒數
-			
+			cursor.execute("SELECT * FROM plant_info WHERE type LIKE " + finall_name +";")
 
 			
 		tEnd = time.time()#計時結束
