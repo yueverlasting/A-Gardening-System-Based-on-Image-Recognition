@@ -10,21 +10,7 @@ import sys
 import time
 import cv2
 import os
-#arduino用函式庫
-#import signal
-#from PyMata.pymata import PyMata
 
-# Digital pin 13 is connected to an LED. If you are running this script with
-# an Arduino UNO no LED is needed (Pin 13 is connected to an internal LED).
-#BOARD_LED = 13
-
-
-# Create a PyMata instance
-#board = PyMata("COM3", verbose=True) #定義板子跟阜 #開啟前先看好
-
-#signal.signal(signal.SIGINT, signal_handler)
-#board.set_pin_mode(BOARD_LED, board.OUTPUT, board.DIGITAL)
-#time.sleep(2)
 
 #資料庫連接
 import pymysql.cursors
@@ -109,7 +95,25 @@ while True:
 			print('')			
 			print('%s	score = %.5f' % (finall_name, finall_num))			
 			print ( 'photo Name : '+ time.strftime("%g%m%d%H%M%S")) #年分後兩位 2017的17 #月份 #日期 #小時 #分鐘 #秒數
-			cursor.execute("SELECT * FROM plant_info WHERE type LIKE " + finall_name +";")
+
+			#選取資料表中特定列
+			sql_line1 = "SELECT * FROM plant_info WHERE type = '"   
+			sql_line2 = "'; "
+			print(sql_line1 + finall_name + sql_line2)	 
+			#print('SELECT * FROM plant_info WHERE type ' + finall_name +';')
+			cursor.execute(sql_line1 + finall_name + sql_line2)
+			print('')
+			
+            #cursor.execute("SELECT * FROM students")
+			row = cursor.fetchone()
+			#print(row)
+			#從dict中抓取各數值
+			temp_high_num =  row ['temp_high']
+			temp_low_num = row ['temp_low']
+			airwet_high_num = row ['airwet_high']
+			airwet_low_num = row ['airwet_low']
+			soil_high_num = row ['soil_high']
+			soil_low_num = row ['soil_low']
 
 			
 		tEnd = time.time()#計時結束
