@@ -115,6 +115,7 @@ while True:
 			soil_high_num = row ['soil_high']
 			soil_low_num = row ['soil_low']
 
+
 			
 		tEnd = time.time()#計時結束
 		
